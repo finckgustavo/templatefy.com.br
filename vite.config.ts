@@ -1,32 +1,37 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
 
 export default defineConfig({
   plugins: [react()],
-  base: '/',
+  base: "/",
+  server: {
+    port: 3000,
+    host: true,
+  },
   optimizeDeps: {
-    exclude: ['lucide-react'],
+    exclude: ["lucide-react"],
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
   build: {
-    outDir: 'dist',
+    outDir: "dist",
     sourcemap: true,
     minify: true,
     cssMinify: true,
-    assetsDir: 'assets',
+    assetsDir: "assets",
+    emptyOutDir: true,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-          ui: ['lucide-react', 'clsx', 'tailwind-merge'],
-          supabase: ['@supabase/supabase-js']
-        }
-      }
-    }
-  }
+          vendor: ["react", "react-dom"],
+          ui: ["lucide-react", "clsx", "tailwind-merge"],
+          supabase: ["@supabase/supabase-js"],
+        },
+      },
+    },
+  },
 });
